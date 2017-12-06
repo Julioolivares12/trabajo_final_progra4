@@ -27,7 +27,31 @@
 
                         <p:submenu label="Mantenimientos" icon="ui-icon-circle-plus">
                             <p:menuitem value="Cliente" outcome="/vistas/administrador/mantenimientoCliente" icon="ui-icon-arrowreturnthick-1-w" />
-                            <p:menuitem value="Tipo Producto" outcome="/vistas/administrador/tipoProducto" icon="ui-icon-arrowreturnthick-1-w" />
+                            <p:menuitem value="Usuarios" icon="ui-icon-arrowreturnthick-1-w" />
+                            <p:submenu label="Producto" icon="ui-icon-circle-plus">
+                                <p:menuitem value="Productos" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Tipo Producto" outcome="/vistas/administrador/tipoProducto" icon="ui-icon-arrowreturnthick-1-w" />
+                            </p:submenu>
+                            <p:submenu label="Registros" icon="ui-icon-circle-plus">
+                                <p:menuitem value="Entradas" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Salidas" icon="ui-icon-arrowreturnthick-1-w" />
+                            </p:submenu>
+                            <p:submenu label="Bodegas" icon="ui-icon-circle-plus">
+                                <p:menuitem value="Bodegas" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Bodegas-clientes" icon="ui-icon-arrowreturnthick-1-w" />
+                            </p:submenu> 
+                        </p:submenu>
+                        <p:submenu label="Facturación" icon="ui-icon-circle-plus">
+                                <p:menuitem value="Factura" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Tipo pago" icon="ui-icon-arrowreturnthick-1-w" />
+                        </p:submenu>
+                        <p:submenu label="Reportes" icon="ui-icon-circle-plus">
+                                <p:menuitem value="Bodega" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Entradas" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Salidas" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Productos" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Cliente" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Facturas" icon="ui-icon-arrowreturnthick-1-w" />
                         </p:submenu>
                         <p:menuitem value="Salir" icon="ui-icon-circle-minus" action="#{loginControl.cerrarSession()}"  />
                     </p:menubar>
