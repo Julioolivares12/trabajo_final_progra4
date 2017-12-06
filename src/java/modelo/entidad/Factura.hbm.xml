@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20-nov-2017 17:28:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Factura" table="factura" catalog="bodegas" optimistic-lock="version">
+        <id name="idFactura" type="java.lang.Integer">
+            <column name="idFactura" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="bodegas" class="modelo.entidad.Bodegas" fetch="select">
+            <column name="idBodega" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cliente" class="modelo.entidad.Cliente" fetch="select">
+            <column name="idCliente" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipopago" class="modelo.entidad.Tipopago" fetch="select">
+            <column name="idTipoPago" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="20" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

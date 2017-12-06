@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20-nov-2017 17:28:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Registroentradas" table="registroentradas" catalog="bodegas" optimistic-lock="version">
+        <id name="idRegistroEntrada" type="java.lang.Integer">
+            <column name="idRegistroEntrada" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="producto" class="modelo.entidad.Producto" fetch="select">
+            <column name="idProducto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="usuario" class="modelo.entidad.Usuario" fetch="select">
+            <column name="idUsuarioRecibio" not-null="true" />
+        </many-to-one>
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
+        </property>
+        <property name="fechaRecibida" type="timestamp">
+            <column name="fecha_recibida" length="19" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20-nov-2017 17:28:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Producto" table="producto" catalog="bodegas" optimistic-lock="version">
+        <id name="idProducto" type="java.lang.Integer">
+            <column name="idProducto" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="bodegas" class="modelo.entidad.Bodegas" fetch="select">
+            <column name="idBodega" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cliente" class="modelo.entidad.Cliente" fetch="select">
+            <column name="idDueno" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tipoproducto" class="modelo.entidad.Tipoproducto" fetch="select">
+            <column name="idTipoProducto" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" not-null="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="20" not-null="true" />
+        </property>
+        <property name="alturaCm" type="big_decimal">
+            <column name="altura_cm" precision="18" scale="4" not-null="true" />
+        </property>
+        <property name="anchoCm" type="big_decimal">
+            <column name="ancho_cm" precision="18" scale="4" not-null="true" />
+        </property>
+        <property name="largoCm" type="big_decimal">
+            <column name="largo_cm" precision="18" scale="4" not-null="true" />
+        </property>
+        <property name="volumen" type="big_decimal">
+            <column name="volumen" precision="18" scale="4" not-null="true" />
+        </property>
+        <property name="pesoLibras" type="big_decimal">
+            <column name="peso_libras" precision="18" not-null="true" />
+        </property>
+        <property name="stock" type="int">
+            <column name="stock" not-null="true" />
+        </property>
+        <set name="registrosalidas" table="registrosalida" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProducto" not-null="true" />
+            </key>
+            <one-to-many class="modelo.entidad.Registrosalida" />
+        </set>
+        <set name="registroentradases" table="registroentradas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idProducto" not-null="true" />
+            </key>
+            <one-to-many class="modelo.entidad.Registroentradas" />
+        </set>
+    </class>
+</hibernate-mapping>

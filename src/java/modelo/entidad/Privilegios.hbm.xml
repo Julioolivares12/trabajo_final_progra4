@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20-nov-2017 17:28:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Privilegios" table="privilegios" catalog="bodegas" optimistic-lock="version">
+        <id name="idPrivilegio" type="java.lang.Integer">
+            <column name="idPrivilegio" />
+            <generator class="identity" />
+        </id>
+        <property name="privilegio" type="string">
+            <column name="privilegio" length="35" not-null="true" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idPrivilegio" not-null="true" />
+            </key>
+            <one-to-many class="modelo.entidad.Usuario" />
+        </set>
+    </class>
+</hibernate-mapping>

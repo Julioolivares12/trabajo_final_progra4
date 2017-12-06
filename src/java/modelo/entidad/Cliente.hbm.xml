@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 20-nov-2017 17:28:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.entidad.Cliente" table="cliente" catalog="bodegas" optimistic-lock="version">
+        <id name="idCliente" type="java.lang.Integer">
+            <column name="idCliente" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" not-null="true" />
+        </property>
+        <property name="representante" type="string">
+            <column name="representante" length="20" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="10" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="20" />
+        </property>
+        <property name="fechaUnion" type="timestamp">
+            <column name="fecha_union" length="19" />
+        </property>
+        <set name="productos" table="producto" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idDueno" not-null="true" />
+            </key>
+            <one-to-many class="modelo.entidad.Producto" />
+        </set>
+        <set name="bodegasclienteses" table="bodegasclientes" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCliente" not-null="true" />
+            </key>
+            <one-to-many class="modelo.entidad.Bodegasclientes" />
+        </set>
+        <set name="facturas" table="factura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idCliente" not-null="true" />
+            </key>
+            <one-to-many class="modelo.entidad.Factura" />
+        </set>
+    </class>
+</hibernate-mapping>
