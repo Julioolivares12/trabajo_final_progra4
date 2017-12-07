@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../../plantilla/administracion.xhtml">
+
+
+            <ui:define name="content">
+                <h3>Listado de Producto</h3>
+                <h:form>
+                    <p:commandButton value="Agregar Producto" actionListener="#{productoControl.limpiarProducto()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+                    <p:separator/>
+                </h:form>
+                <h:form id="frmListado">
+                    <p:dataTable id="tablaProductos" paginator="true" paginatorPosition="botton" rows="10" var="producto" value="#{productoControl.listaProducto}" emptyMessage="no existen datos para mostrar">
+                        <p:column headerText="codigo producto" style="text-align: center">
+                            <h:outputText value="#{producto.idProducto}"/>
+                        </p:column>
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{producto.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Descripcion">
+                            <h:outputText value="#{producto.descripcion}"/>
+                        </p:column>
+                        <p:column headerText="tipo producto">
+                            <h:outputText value="#{producto.tipoproducto.tipo}"
+                        </p:column>
+                        <p:column headerText="altura">
+                            <h:outputText value="#{producto.alturaCm}"/>
+                        </p:column>
+                        <p:column headerText="ancho">
+                            <h:outputText value="#{producto.anchoCm}"/>
+                        </p:column>
+                        <p:column headerText="largo">
+                            <h:outputText value="#{producto.largoCm}"/>
+                        </p:column>
+                        <p:column headerText="volumen">
+                            <h:outputText value="#{producto.volumen}"/>
+                        </p:column>
+                        <p:column headerText="Peso">
+                            <h:outputText value="#{producto.pesoLibras}"
+                        </p:column>
+                        <p:column headerText="stock">
+                            <h:outputText value="#{producto.stock}"/>
+                        </p:column>
+                        <p:column headerText="Bodega">
+                            <h:outputText value="#{producto.bodegas}"
+                        </p:column>
+                        <p:column headerText="Cliente">
+                            <h:outputText value="#{producto.cliente}"
+                        </p:column>
+                        <p:column headerText="MODIFICAR" style="text-align: center">
+                            <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialoModificar').show();" update=":formModificar">
+                                <f:setPropertyActionListener target="#{productoControl.producto}" value="#{producto}"/>
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="ELIMINAR" style="text-align: center">
+                            <p:commandButton icon="ui-icon-trash" title="Eliminar" oncomplete="PF('dialogoEliminar').show();"update=":formEliminar">
+                                <f:setPropertyActionListener target="#{productoControl.producto}" value="#{producto}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+                
+                <h:form id="formAgregar">
+                    <p:dialog id="dlAgregar" header="Agregar Producto" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                        <p:panelGrid columns="2" style="margin: 0 auto;">
+                            <p:outputLabel value="nombre:"/>
+                            <p:inputText value="#{producto.nombre}"/>
+                             <p:outputLabel value="nombre:"/>
+                             <p:inputText value="#{producto.descripcion}"/>
+                             <p:outputLabel value="tipo:"/>
+                            <p:inputText value="#{producto.nombre}"/>
+                             <p:outputLabel value="nombre:"/>
+                            <p:inputText value="#{producto.nombre}"/>
+                             <p:outputLabel value="nombre:"/>
+                            <p:inputText value="#{producto.nombre}"/>
+                             <p:outputLabel value="nombre:"/>
+                            <p:inputText value="#{producto.nombre}"/>
+                             <p:outputLabel value="nombre:"/>
+                            <p:inputText value="#{producto.nombre}"/>
+                             <p:outputLabel value="nombre:"/>
+                            <p:inputText value="#{producto.nombre}"/>
+                             <p:outputLabel value="nombre:"/>
+                            <p:inputText value="#{producto.nombre}"/>
+                             <p:outputLabel value="nombre:"/>
+                            <p:inputText value="#{producto.nombre}"/>
+                             <p:outputLabel value="nombre:"/>
+                            <p:inputText value="#{producto.nombre}"/>
+                            
+                            
+                            
+                            
+                        </p:panelGrid>
+                    </p:dialog>
+                </h:form>
+                
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
