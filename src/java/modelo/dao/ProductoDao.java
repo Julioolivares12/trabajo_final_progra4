@@ -30,6 +30,52 @@ public class ProductoDao {
         return lista;
     }
     public void agregar(Producto producto){
-        
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(producto);
+            session.getTransaction().commit();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            session.getTransaction().rollback();
+        }
+        finally{
+            if(session != null){
+                session.close();
+            }
+        }
+    }
+    public void actualizar(Producto producto){
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(producto);
+            session.getTransaction().commit();
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            session.getTransaction().rollback();
+        }
+        finally{
+            if(session != null)
+                session.close();
+        }
+    }
+    public void eleminar(Producto producto){
+        Session session=null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(producto);
+            session.getTransaction().commit();
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            session.getTransaction().rollback();
+        }
+        finally{
+            if(session!=null)
+                session.close();
+        }
     }
 }
