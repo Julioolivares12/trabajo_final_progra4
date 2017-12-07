@@ -76,7 +76,10 @@
                              <p:outputLabel value="nombre:"/>
                              <p:inputText value="#{producto.descripcion}"/>
                              <p:outputLabel value="tipo:"/>
-                            <p:inputText value="#{producto.nombre}"/>
+                             <p:selectOneMenu value="#{producto.tipoproducto.idTipo}">
+                                 <f:selectItem itemLabel="--Seleccione--"/>
+                                 <f:selectItem value="#{productoControl.listaProducto}"
+                             </p:selectOneMenu>p:>
                              <p:outputLabel value="nombre:"/>
                             <p:inputText value="#{producto.nombre}"/>
                              <p:outputLabel value="nombre:"/>
