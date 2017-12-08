@@ -5,6 +5,8 @@
  */
 package controlador;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +27,11 @@ public class BodegasControl {
     
     private List<Bodegas> listaBodegas;
     private Bodegas bodegas;
-    
+    private BigDecimal vt,al,an,la,vo,vd; 
+   // private BigDecimal al; //altura
+   // private BigDecimal an; //anchi
+   // private BigDecimal la; //largo 
+    //vd=disponible
      public BodegasControl() {
         bodegas = new Bodegas();
     }
@@ -55,11 +61,31 @@ public class BodegasControl {
     public void agregarBodegas() {
         BodegasDao rd = new BodegasDao();
        // bodegas.setUsuario(loginControl.getUsuario());
+      al=bodegas.getAlturaCmTotal();
+      an= bodegas.getAnchoCmTotal();
+      la=bodegas.getLargoCmTotal();
+      vt= (al.multiply(an)).multiply(la);
+      vo = vt.subtract(vt);   
+      
+      bodegas.setVolumenTotal(vt);
+      bodegas.setVolumenDisponible(vt);
+      bodegas.setVolumenOcupado(vo);
+            
         rd.agregar(bodegas);
     }
 
     public void modificarBodegas() {
         BodegasDao rd = new BodegasDao();
+        
+      al=bodegas.getAlturaCmTotal();
+      an= bodegas.getAnchoCmTotal();
+      la=bodegas.getLargoCmTotal();
+      vt= (al.multiply(an)).multiply(la);
+      vd= vt.subtract(bodegas.getVolumenOcupado());
+      
+      bodegas.setVolumenTotal(vt);
+      bodegas.setVolumenDisponible(vd);
+
         rd.modificar(bodegas);
         limpiarBodegas();
     }
