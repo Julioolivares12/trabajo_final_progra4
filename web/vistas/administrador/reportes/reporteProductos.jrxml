@@ -13,9 +13,8 @@
 			<style mode="Opaque" backcolor="#F0EFEF"/>
 		</conditionalStyle>
 	</style>
-	<parameter name="nombre" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select * from producto where nombre =$P{nombre}]]>
+		<![CDATA[select * from producto ]]>
 	</queryString>
 	<field name="idProducto" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -102,77 +101,77 @@
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[nombre]]></text>
+				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="72" y="0" width="72" height="18" forecolor="#000000" uuid="ae8a6291-2db7-4724-97c8-25ea3ec08e38"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[descripcion]]></text>
+				<text><![CDATA[Descripción]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="144" y="0" width="72" height="18" forecolor="#000000" uuid="fe5f8262-d128-4d18-bc57-4cb515f5344c"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[idTipoProducto]]></text>
+				<text><![CDATA[Tipo Prod.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="216" y="0" width="72" height="18" forecolor="#000000" uuid="adbf5f23-86fb-4dd5-8806-7f27c551d11b"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[altura_cm]]></text>
+				<text><![CDATA[Altura cm]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="288" y="0" width="72" height="18" forecolor="#000000" uuid="83a6deea-e7f4-421f-9ca9-e1a9052133a0"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[ancho_cm]]></text>
+				<text><![CDATA[Ancho cm]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="360" y="0" width="72" height="18" forecolor="#000000" uuid="66957aff-bbc2-4561-a4d7-d6e4a4593873"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[largo_cm]]></text>
+				<text><![CDATA[Largo cm]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="432" y="0" width="72" height="18" forecolor="#000000" uuid="dcd7799f-aeff-4d4d-bfad-f25e809a0ebe"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[volumen]]></text>
+				<text><![CDATA[Volumen]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="504" y="0" width="72" height="18" forecolor="#000000" uuid="44757988-fe72-4d44-9b83-1391d6eac8e2"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[peso_libras]]></text>
+				<text><![CDATA[Peso (libras)]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="576" y="0" width="72" height="18" forecolor="#000000" uuid="2f00cb77-c7a6-49dd-b4b8-f9ff2176e6c1"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[stock]]></text>
+				<text><![CDATA[Stock]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="648" y="0" width="72" height="18" forecolor="#000000" uuid="062599be-4047-4d69-a8ed-002b30354c67"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[idBodega]]></text>
+				<text><![CDATA[Bodega]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" x="720" y="0" width="72" height="18" forecolor="#000000" uuid="1c6facff-c95f-40be-b241-3246399a217d"/>
 				<textElement>
 					<font isBold="false"/>
 				</textElement>
-				<text><![CDATA[idDueno]]></text>
+				<text><![CDATA[Cliente]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
