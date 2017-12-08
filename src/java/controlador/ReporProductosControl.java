@@ -39,7 +39,7 @@ public class ReporProductosControl implements Serializable {
     JasperPrint jasperPrint;
     HttpServletResponse httpServletResponse = null;
     private String nombre;
-    private String imagenUrl;
+   
     
 
     /**
@@ -59,11 +59,16 @@ public class ReporProductosControl implements Serializable {
 
         ServletContext sc = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String reportPath = sc.getRealPath("vistas/administrador/reportes/reporteProductos.jasper");
-        String logoPath = sc.getRealPath("vistas/administrador/resportes/3.png");
+
+        String logoPath = sc.getRealPath("vistas/administrador/reportes/3.png");
+
+        
+
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("nombre", nombre );
         
-        parametros.put("imagenUrl",logoPath);
+
+        parametros.put("logo", logoPath);
         
         try {
             jasperPrint = JasperFillManager.fillReport(reportPath, parametros, con);

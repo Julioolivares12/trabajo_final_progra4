@@ -33,7 +33,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 @ManagedBean
 @ViewScoped
 
-public class ReportClienteControl implements Serializable {
+public class ReportBodegasControl implements Serializable {
 
     JasperPrint jasperPrint;
     HttpServletResponse httpServletResponse = null;
@@ -43,7 +43,7 @@ public class ReportClienteControl implements Serializable {
     /**
      * Creates a new instance of ReporteControl
      */
-    public ReportClienteControl() {
+    public ReportBodegasControl() {
     }
 
     public void generarReporte() {
@@ -56,7 +56,7 @@ public class ReportClienteControl implements Serializable {
         }
 
         ServletContext sc = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        String reportPath = sc.getRealPath("vistas/administrador/reportes/reporteClientes.jasper");
+        String reportPath = sc.getRealPath("vistas/administrador/reportes/reporteBodegas.jasper");
         String logoPath = sc.getRealPath("vistas/administrador/reportes/3.png");
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("nombre", nombre );
@@ -66,7 +66,7 @@ public class ReportClienteControl implements Serializable {
         try {
             jasperPrint = JasperFillManager.fillReport(reportPath, parametros, con);
         } catch (JRException ex) {
-            Logger.getLogger(ReporProductosControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReportBodegasControl.class.getName()).log(Level.SEVERE, null, ex);
         }
         httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         httpServletResponse.setContentType("application/pdf");
@@ -76,7 +76,7 @@ public class ReportClienteControl implements Serializable {
             servletOutputStream = httpServletResponse.getOutputStream();
             JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
         } catch (Exception ex) {
-            Logger.getLogger(ReportClienteControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReportBodegasControl.class.getName()).log(Level.SEVERE, null, ex);
         }
         FacesContext.getCurrentInstance().responseComplete();
     }
@@ -94,3 +94,4 @@ public class ReportClienteControl implements Serializable {
    
      
 }
+
