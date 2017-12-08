@@ -66,7 +66,7 @@ public class ProductoControl {
         listaBodegas.clear();
         for(Bodegas bodega : b)
         {
-            SelectItem bodegaItem = new SelectItem(bodega.getIdBodega()+" "+bodega.getProductos());
+            SelectItem bodegaItem = new SelectItem(bodega.getIdBodega());
             listaBodegas.add(bodegaItem);
         }
         return listaBodegas; 

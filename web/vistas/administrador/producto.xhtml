@@ -14,10 +14,10 @@
             <ui:define name="content">
                  <h3>Listado de Producto</h3>		
                 <h:form>		
-                    <p:commandButton value="Agregar Producto" actionListener="#{productoControl.limpiarProducto()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>		
+                    <p:commandButton value="Agregar Producto" actionListener="#{productoControl.limpiarProducto()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar" />		
                     <p:separator/>		
                 </h:form>		
-                <h:form id="frmListado">		
+                <h:form id="formListado">		
                     <p:dataTable id="tablaProductos" paginator="true" paginatorPosition="botton" rows="10" var="producto" value="#{productoControl.listaProducto}" emptyMessage="no existen datos para mostrar">		
                         <p:column headerText="codigo producto" style="text-align: center">		
                             <h:outputText value="#{producto.idProducto}"/>		
@@ -99,7 +99,7 @@
                                 <f:selectItems value="#{productoControl.listaClientes}"/>
                             </h:selectOneMenu>			
                         </p:panelGrid>
-                        <p:commandButton  value="Guardar" actionListener="#{productoControl.agregarProducto()}" update=":formListado:tablaProductos" oncomplete="PF('dialogoAgregar').hide();"/>
+                        <p:commandButton  value="Guardar" actionListener="#{productoControl.agregarProducto()}" update="formListado:tablaProductos" oncomplete="PF('dialogoAgregar').hide();"/>
                         <p:commandButton value="Cancelar" onclick="PF('dialogoAgregar').hide();" />
                     </p:dialog>		
                 </h:form>
