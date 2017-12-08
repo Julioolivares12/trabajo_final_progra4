@@ -10,14 +10,14 @@
         <ui:composition template="./../../plantilla/administracion.xhtml">
 
             <ui:define name="content">
-                <h3>REPORTE DE PRODUCTOS</h3>
+                <h3>REPORTE DE CLIENTES</h3>
                 <h:form>
                     <p:panel>
                         <p:panelGrid>
                             <p:row>                               
                                
                                 <p:column>
-                                     <p:commandButton value="Generar" action="#{reporProductosControl.generarReporte()}" ajax="false" onclick="target = '_blank'"  />
+                                     <p:commandButton value="Generar" action="#{reportClienteControl.generarReporte()}" ajax="false" onclick="target = '_blank'"  />
                                 </p:column>
                             </p:row>
                             
