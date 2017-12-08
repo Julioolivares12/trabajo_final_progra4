@@ -71,11 +71,12 @@
                             <p:inputText value="#{producto.nombre}"/>		
                             <p:outputLabel value="nombre:"/>		
                             <p:inputText value="#{producto.descripcion}"/>		
-                            <p:outputLabel value="tipo:"/>		
-                            <p:selectOneMenu value="#{producto.tipoproducto.idTipo}">		
+                            <p:outputLabel value="tipo:"/>	
+                            <h:selectOneMenu value="#{producto.tipoproducto.idTipo}">
                                 <f:selectItem itemLabel="--Seleccione--"/>		
-                                <f:selectItems value="#{productoControl.listaProducto}"/>		
-                            </p:selectOneMenu>		
+                                <f:selectItems value="#{productoControl.listaProducto}"/>
+                            </h:selectOneMenu>
+                            	
                             <p:outputLabel value="altura"/>		
                             <p:inputText value="#{producto.alturaCm}"/>		
                             <p:outputLabel value="ancho:"/>		
@@ -89,14 +90,14 @@
                             <p:outputLabel value="stock:"/>		
                             <p:inputText value="#{producto.stock}"/>		
                             <p:outputLabel value="bodegas:"/>		
-                            <p:selectOneMenu value="#{producto.bodegas.idBodega}">
+                            <h:selectOneMenu value="#{producto.bodegas.idBodega}">
                                 <f:selectItem itemLabel="--seleccione--"/>
                                 <f:selectItems value="#{productoControl.listaBodegas}"/>
-                            </p:selectOneMenu>		
+                            </h:selectOneMenu>		
                             <p:outputLabel value="dueño:"/>		
-                            <p:selectOneMenu value="#{producto.cliente.idCliente}">
+                            <h:selectOneMenu value="#{producto.cliente.idCliente}">
                                 <f:selectItems value="#{productoControl.listaClientes}"/>
-                            </p:selectOneMenu>			
+                            </h:selectOneMenu>			
                         </p:panelGrid>
                         <p:commandButton  value="Guardar" actionListener="#{productoControl.agregarProducto()}" update=":formListado:tablaProductos" oncomplete="PF('dialogoAgregar').hide();"/>
                         <p:commandButton value="Cancelar" onclick="PF('dialogoAgregar').hide();" />
@@ -111,10 +112,10 @@
                             <p:outputLabel value="nombre:"/>		
                             <p:inputText value="#{producto.descripcion}"/>		
                             <p:outputLabel value="tipo:"/>	
-                            <p:selectOneMenu value="#{producto.tipoproducto.idTipo}">		
+                            <h:selectOneMenu value="#{producto.tipoproducto.idTipo}">		
                                 <f:selectItem itemLabel="--Seleccione--"/>		
                                 <f:selectItems value="#{productoControl.listaProducto}"/>		
-                            </p:selectOneMenu>		
+                            </h:selectOneMenu>		
                             <p:outputLabel value="altura"/>		
                             <p:inputText value="#{producto.alturaCm}"/>		
                             <p:outputLabel value="ancho:"/>		
@@ -128,10 +129,10 @@
                             <p:outputLabel value="stock:"/>		
                             <p:inputText value="#{producto.stock}"/>		
                             <p:outputLabel value="bodegas:"/>		
-                            <p:selectOneMenu value="#{producto.bodegas.idBodega}">
+                            <h:selectOneMenu value="#{producto.bodegas.idBodega}">
                                 <f:selectItems itemLabel="--seleccione--"/>
                                 <f:selectItems value="#{productoControl.listaBodegas}"/>
-                            </p:selectOneMenu>		
+                            </h:selectOneMenu>		
                             <p:outputLabel value="dueño:"/>		
                             <p:selectOneMenu value="#{producto.cliente.idCliente}">
                                 <f:selectItems value="#{productoControl.listaClientes}"/>
