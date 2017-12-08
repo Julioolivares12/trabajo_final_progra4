@@ -12,19 +12,19 @@
         <ui:composition template="./../../plantilla/administracion.xhtml">
 
             <ui:define name="content">
-                <h3>LISTADO DE Bodegas</h3>
+                <h3>LISTADO DE FACTURA</h3>
                 <h:form>
-                    <p:commandButton value="Agregar Factura" actionListener="#{rentaControl.limpiarFactura()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
+                    <p:commandButton value="Agregar Factura" actionListener="#{facturaControl.limpiarFactura()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
                     <p:separator/>
                 </h:form>
                 <h:form id="formListado">
-                    <p:dataTable id="tablaBodegas" paginator="true" paginatorPosition="bottom" rows="10" var="factura" value="#{rentaControl.listaFacturas}" emptyMessage="No existen Facturas">
+                    <p:dataTable id="tablaBodegas" paginator="true" paginatorPosition="bottom" rows="10" var="factura" value="#{facturaControl.listaFactura}" emptyMessage="No existen Facturas">
                         <p:column headerText="FACTURA" style="text-align: center">
                             <h:outputText value="#{factura.idFactura}" />
                         </p:column>
                       
                         <p:column headerText="CLIENTE">
-                            <p:button value="#{factura.cliente.nombre}"></p:button>
+                            <h:outputText value=""/>
                         </p:column>
                         <p:column headerText="BODEGA">
                             <h:outputText value=""/>
