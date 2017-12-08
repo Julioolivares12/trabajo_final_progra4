@@ -33,17 +33,17 @@ import net.sf.jasperreports.engine.JasperPrint;
 @ManagedBean
 @ViewScoped
 
-public class ReporProductosControl implements Serializable {
+public class ReportRegistrosControl implements Serializable {
 
     JasperPrint jasperPrint;
     HttpServletResponse httpServletResponse = null;
-    private String nombre;
+    String nombre;
     
 
     /**
      * Creates a new instance of ReporteControl
      */
-    public ReporProductosControl() {
+    public ReportRegistrosControl() {
     }
 
     public void generarReporte() {
@@ -56,7 +56,7 @@ public class ReporProductosControl implements Serializable {
         }
 
         ServletContext sc = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-        String reportPath = sc.getRealPath("vistas/administrador/reportes/reporteProductos.jasper");
+        String reportPath = sc.getRealPath("vistas/administrador/reportes/reporteRegistros.jasper");
         String logoPath = sc.getRealPath("vistas/administrador/reportes/3.png");
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("nombre", nombre );
@@ -70,13 +70,13 @@ public class ReporProductosControl implements Serializable {
         }
         httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
         httpServletResponse.setContentType("application/pdf");
-        httpServletResponse.setHeader("Content-Disposition", "inline; filename=productos.pdf");
+        httpServletResponse.setHeader("Content-Disposition", "inline; filename=registro.pdf");
         ServletOutputStream servletOutputStream;
         try {
             servletOutputStream = httpServletResponse.getOutputStream();
             JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
         } catch (Exception ex) {
-            Logger.getLogger(ReporProductosControl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReportRegistrosControl.class.getName()).log(Level.SEVERE, null, ex);
         }
         FacesContext.getCurrentInstance().responseComplete();
     }
@@ -88,6 +88,8 @@ public class ReporProductosControl implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    
 
    
      

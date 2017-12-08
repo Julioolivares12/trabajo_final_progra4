@@ -57,11 +57,11 @@ public class ReportClienteControl implements Serializable {
 
         ServletContext sc = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String reportPath = sc.getRealPath("vistas/administrador/reportes/reporteClientes.jasper");
-        //String logoPath = sc.getRealPath("resources/imagenes/3.png");
+        String logoPath = sc.getRealPath("vistas/administrador/reportes/3.png");
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("nombre", nombre );
         
-        //parametros.put("logo", logoPath);
+        parametros.put("logo", logoPath);
         
         try {
             jasperPrint = JasperFillManager.fillReport(reportPath, parametros, con);
