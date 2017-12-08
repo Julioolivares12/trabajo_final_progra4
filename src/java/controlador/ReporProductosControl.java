@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -38,6 +39,7 @@ public class ReporProductosControl implements Serializable {
     JasperPrint jasperPrint;
     HttpServletResponse httpServletResponse = null;
     private String nombre;
+    private String imagenUrl;
     
 
     /**
@@ -57,11 +59,11 @@ public class ReporProductosControl implements Serializable {
 
         ServletContext sc = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
         String reportPath = sc.getRealPath("vistas/administrador/reportes/reporteProductos.jasper");
-        //String logoPath = sc.getRealPath("resources/imagenes/3.png");
+        String logoPath = sc.getRealPath("vistas/administrador/resportes/3.png");
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("nombre", nombre );
         
-        //parametros.put("logo", logoPath);
+        parametros.put("imagenUrl",logoPath);
         
         try {
             jasperPrint = JasperFillManager.fillReport(reportPath, parametros, con);
@@ -75,7 +77,7 @@ public class ReporProductosControl implements Serializable {
         try {
             servletOutputStream = httpServletResponse.getOutputStream();
             JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
-        } catch (Exception ex) {
+        } catch (IOException | JRException ex) {
             Logger.getLogger(ReporProductosControl.class.getName()).log(Level.SEVERE, null, ex);
         }
         FacesContext.getCurrentInstance().responseComplete();
