@@ -5,10 +5,12 @@
  */
 package controlador;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 import modelo.dao.BodegasDao;
 import modelo.dao.ClienteDao;
 import modelo.dao.ProductoDao;
@@ -28,11 +30,27 @@ public class ProductoControl {
      * Creates a new instance of ProductoControl
      */
     private List<Producto> listaProducto;
-    private List<Bodegas> listaBodegas;
-    private List<Cliente> listaCliente;
+    private List<SelectItem> listaBodegas;
+    private List<SelectItem> listaCliente;
     private Producto producto;
+    private Bodegas bodegas;
     private Cliente cliente;
-    private Bodegas bodega;
+
+    public Bodegas getBodegas() {
+        return bodegas;
+    }
+
+    public void setBodegas(Bodegas bodegas) {
+        this.bodegas = bodegas;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
     public ProductoControl() {
        producto = new Producto();
     }
@@ -41,14 +59,27 @@ public class ProductoControl {
         listaProducto = p.listaProducto();
         return listaProducto;
     }
-    public List<Bodegas>getListaBodegas(){
+    public List<SelectItem>getListaBodegas(){
+        this.listaBodegas = new ArrayList<SelectItem>();
         BodegasDao bodegasDao = new BodegasDao();
-        listaBodegas = bodegasDao.listarBodegas();
+        List<Bodegas> b = bodegasDao.listarBodegas();
+        listaBodegas.clear();
+        for(Bodegas bodega : b)
+        {
+            SelectItem bodegaItem = new SelectItem(bodega.getIdBodega()+" "+bodega.getProductos());
+            listaBodegas.add(bodegaItem);
+        }
         return listaBodegas; 
     }
-    public List<Cliente>getListaClientes(){
-        ClienteDao cliente = new ClienteDao();
-        listaCliente = cliente.listarClientes();
+    public List<SelectItem>getListaClientes(){
+        this.listaCliente = new ArrayList<SelectItem>();
+        ClienteDao clienteDao = new ClienteDao();
+        List<Cliente> c = clienteDao.listarClientes();
+        listaCliente.clear();
+        for(Cliente cliente1 : c){
+            SelectItem clienteItem = new SelectItem(cliente1.getIdCliente()+" "+cliente1.getNombre());
+            listaCliente.add(clienteItem);
+        }
         return listaCliente;
     }
      public void setListaProducto(List<Producto>listaProducto){
