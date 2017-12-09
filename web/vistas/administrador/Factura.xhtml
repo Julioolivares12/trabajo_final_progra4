@@ -44,17 +44,23 @@
                 </h:form>		
 
                 <h:form id="formAgregar">		
-                    <p:dialog id="dlAgregar" header="Agregar Producto" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">		
+                    <p:dialog id="dlAgregar" header="Agregar Factura" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">		
                         <p:panelGrid columns="2" style="margin: 0 auto;">				
-                            <p:outputLabel value="bodegas:"/>		
-                            <h:selectOneMenu value="#{factura.bodegas.idBodega}">
+                            <p:outputLabel value="Bodega:"/>		
+                            <h:selectOneMenu value="#{facturaControl.bodegas.idBodega}">
                                 <f:selectItem itemLabel="--seleccione--"/>
                                 <f:selectItems value="#{facturaControl.listaBodegas}"/>
                             </h:selectOneMenu>		
-                            <p:outputLabel value="dueño:"/>		
-                            <h:selectOneMenu value="#{factura.cliente.idCliente}">
-                                <f:selectItems value="#{facturaControl.listaClientes}"/>
-                            </h:selectOneMenu>			
+                            <p:outputLabel value="Cliente:"/>		
+                            <h:selectOneMenu value="#{facturaControl.cliente.idCliente}">
+                                <f:selectItems value="#{facturaControl.listaCliente}"/>
+                            </h:selectOneMenu>	
+                            <p:outputLabel value="Tipo Pago:"/>		
+                            <h:selectOneMenu value="#{facturaControl.tipopago.idTipoPago}">
+                                <f:selectItems value="#{facturaControl.listaTipopago}"/>
+                            </h:selectOneMenu>
+                            <p:outputLabel value="Estado:"/>
+                            <p:inputText value="#{facturaControl.estado}"/>
                         </p:panelGrid>
                         <p:commandButton  value="Guardar" actionListener="#{facturaControl.agregarFactura()}" update="formListado:tablaFactura" oncomplete="PF('dialogoAgregar').hide();"/>
                         <p:commandButton value="Cancelar" onclick="PF('dialogoAgregar').hide();" />
@@ -71,8 +77,10 @@
                             </h:selectOneMenu>		
                             <p:outputLabel value="dueño:"/>		
                             <p:selectOneMenu value="#{factura.cliente.idCliente}">
-                                <f:selectItems value="#{facturaControl.listaClientes}"/>
-                            </p:selectOneMenu>			
+                                <f:selectItems value="#{facturaControl.listaCliente}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Estado:"/>
+                            <p:inputText value="#{factura.estado}"/>
                         </p:panelGrid>
                         <p:commandButton  value="Guardar" actionListener="#{facturaControl.modificarFactura()}" update=":formListado:tablaFactura" oncomplete="PF('dialogoModificar').hide();"/>
                         <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();" />
