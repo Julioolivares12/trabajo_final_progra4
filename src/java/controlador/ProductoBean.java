@@ -5,11 +5,14 @@
  */
 package controlador;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.faces.model.SelectItem;
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+import javax.faces.model.SelectItem;
 import modelo.dao.BodegasDao;
 import modelo.dao.ClienteDao;
 import modelo.dao.ProductoDao;
@@ -23,15 +26,18 @@ import modelo.entidad.Tipoproducto;
  *
  * @author julio
  */
-@Named(value = "productoBean")
+//@Named(value = "productoBean")
 @ViewScoped
-public class ProductoBean {
+@Named("productoBean")
+public class ProductoBean implements Serializable{
 
     /**
      * Creates a new instance of ProductoBean
      */
     public ProductoBean() {
+       
     }
+    
     private Producto producto;
     private List<Producto> listaProducto;
     private List<SelectItem> listaBodegas;
@@ -143,6 +149,10 @@ public class ProductoBean {
         Producto producto;
         producto = new Producto();
     }
+    @PostConstruct
+public void init() {
+   producto = new Producto();
+}
     
 }
     
