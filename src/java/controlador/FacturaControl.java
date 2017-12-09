@@ -5,52 +5,49 @@
  */
 package controlador;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
+import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
+import modelo.dao.BodegasDao;
+import modelo.dao.ClienteDao;
 import modelo.dao.FacturaDao;
 import modelo.entidad.Bodegas;
 import modelo.entidad.Cliente;
 import modelo.entidad.Factura;
+
 /**
  *
- * @author Mcortez
+ * @author julio
  */
-
 @ManagedBean
 @ViewScoped
-public class FacturaControl {
+public class FacturaControl implements Serializable {
+
     
+    /**
+     * Creates a new instance of FacturaControl
+     */
+    //Listas
     private List<Factura> listaFactura;
+    private List<SelectItem> listaBodegas;
+    private List<SelectItem> listaCliente;
+
+    
+    //variables
     private Factura factura;
+    private Bodegas bodegas;
     private Cliente cliente;
-    private Bodegas bodega;
-     public FacturaControl() {
-        factura = new Factura();
+
+    public Bodegas getBodegas() {
+        return bodegas;
     }
 
-    public List<Factura> getListaFactura() {
-        FacturaDao rd = new FacturaDao();
-        listaFactura = rd.listarFactura();
-        return listaFactura;
-    }
-
-    public void setListaFactura(List<Factura> listaFactura) {
-        this.listaFactura = listaFactura;
-    }
-
-    public Factura getFactura() {
-        return factura;
-    }
-
-    public void setFactura(Factura factura) {
-        this.factura = factura;
+    public void setBodegas(Bodegas bodegas) {
+        this.bodegas = bodegas;
     }
 
     public Cliente getCliente() {
@@ -60,34 +57,57 @@ public class FacturaControl {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-
-    public Bodegas getBodega() {
-        return bodega;
+    public FacturaControl() {
+       factura = new Factura();
     }
-
-    public void setBodega(Bodegas bodega) {
-        this.bodega = bodega;
+    public List<Factura>getListaFactura(){
+        FacturaDao p = new FacturaDao();
+        listaFactura = p.listaFactura();
+        return listaFactura;
     }
-    
-    public void limpiarFactura() {
+    public List<SelectItem>getListaBodegas(){
+        this.listaBodegas = new ArrayList<SelectItem>();
+        BodegasDao bodegasDao = new BodegasDao();
+        List<Bodegas> b = bodegasDao.listarBodegas();
+        listaBodegas.clear();
+        for(Bodegas bodega : b)
+        {
+            SelectItem bodegaItem = new SelectItem(bodega.getIdBodega());
+            listaBodegas.add(bodegaItem);
+        }
+        return listaBodegas; 
+    }
+    public List<SelectItem>getListaClientes(){
+        this.listaCliente = new ArrayList<SelectItem>();
+        ClienteDao clienteDao = new ClienteDao();
+        List<Cliente> c = clienteDao.listarClientes();
+        listaCliente.clear();
+        for(Cliente cliente1 : c){
+            SelectItem clienteItem = new SelectItem(cliente1.getNombre());
+            listaCliente.add(clienteItem);
+        }
+        return listaCliente;
+    }
+     public void setListaFactura(List<Factura>listaFactura){
+        this.listaFactura = listaFactura;
+    }
+    public void setFactura(Factura factura){
+        this.factura=factura;
+    }
+    public Factura getFactura(){
+        return this.factura;
+    }
+    public void limpiarFactura(){
         factura = new Factura();
     }
-
-    public void agregarFactura() {
-        FacturaDao rd = new FacturaDao();   
-        rd.agregar(factura);
+    public void agregarFactura(){
+        FacturaDao p = new FacturaDao();
+        p.agregar(factura);
     }
-
-    public void modificarFactura() {
-        FacturaDao rd = new FacturaDao();
-        rd.modificar(factura);
-        limpiarFactura();
+    public void modificarFactura(){
+        FacturaDao p = new FacturaDao();
+        p.actualizar(factura);
     }
-
-    public void eliminarFactura() {
-        FacturaDao rd = new FacturaDao();
-        rd.eliminar(factura);
-        limpiarFactura();
-    }
-
+    
+    
 }

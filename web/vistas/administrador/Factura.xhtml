@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-       
+      
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
@@ -12,89 +12,72 @@
         <ui:composition template="./../../plantilla/administracion.xhtml">
 
             <ui:define name="content">
-                <h3>LISTADO DE FACTURA</h3>
-                <h:form>
-                    <p:commandButton value="Agregar Factura" actionListener="#{facturaControl.limpiarFactura()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar"/>
-                    <p:separator/>
-                </h:form>
-                <h:form id="formListado">
-                    <p:dataTable id="tablaBodegas" paginator="true" paginatorPosition="bottom" rows="10" var="factura" value="#{facturaControl.listaFactura}" emptyMessage="No existen Facturas">
-                        <p:column headerText="FACTURA" style="text-align: center">
-                            <h:outputText value="#{factura.idFactura}" />
-                        </p:column>
-                      
-                        <p:column headerText="CLIENTE">
-                            <h:outputText value="#{factura.cliente.nombre}"/>
-                        </p:column>
-                        <p:column headerText="BODEGA">
-                            <h:outputText value="#{factura.bodegas.idBodega}"/>
-                        </p:column>
-                        <p:column headerText="PRECIO">
-                            <h:outputText value=""/>
-                        </p:column>
-                        <p:column headerText="TIPO PAGO" style="text-align: center">
-                            <h:outputText value=""/>
-                        </p:column>
-                        <p:column headerText="ESTADO">
-                            <h:outputText value="#{factura.estado}"/>
-                        </p:column>
-                                            
-                        <p:column headerText="MODIFICAR" style="text-align: center">
-                            <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">
-                                <f:setPropertyActionListener target="#{bodegasControl.bodegas}" value="#{bodegas}"/>
-                            </p:commandButton>
-                        </p:column>
-              
-                    </p:dataTable>
-                </h:form>
+                <center><h3>Listado de Facturas</h3></center>	
+                <h:form>		
+                    <p:commandButton value="Agregar Factura" actionListener="#{facturaControl.limpiarFactura()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar" />		
+                    <p:separator/>		
+                </h:form>		
+                <h:form id="formListado">		
+                    <p:dataTable id="tablaFactura" paginator="true" paginatorPosition="botton" rows="10" var="factura" value="#{facturaControl.listaFactura}" emptyMessage="no existen datos para mostrar">		
+                        <p:column headerText="codigo factura" style="text-align: center">		
+                            <h:outputText value="#{factura.idFactura}"/>		
+                        </p:column>		
+                        <p:column headerText="Nombre Cliente">		
+                            <h:outputText value="#{factura.cliente.nombre}"/>		
+                        </p:column>		
+                        <p:column headerText="Bodega">		
+                            <h:outputText value="#{factura.bodegas.idBodega}"/>		
+                        </p:column>		
+                        <p:column headerText="Tipo pago">		
+                            <h:outputText value="#{factura.tipopago.tipoPago}"/>		
+                        </p:column>		
+                        <p:column headerText="Estado">		
+                            <h:outputText value="#{factura.estado}"/>		
+                        </p:column>				
+                        <p:column headerText="MODIFICAR" style="text-align: center">		
+                            <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">		
+                                <f:setPropertyActionListener target="#{facturaControl.factura}" value="#{factura}"/>		
+                            </p:commandButton>		
+                        </p:column>		
+                        		
+                    </p:dataTable>		
+                </h:form>		
 
-                <h:form id="formAgregar">
-                    <p:dialog id="dlgAgregar" header="Agregar Factura" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
+                <h:form id="formAgregar">		
+                    <p:dialog id="dlAgregar" header="Agregar Producto" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">		
+                        <p:panelGrid columns="2" style="margin: 0 auto;">				
+                            <p:outputLabel value="bodegas:"/>		
+                            <h:selectOneMenu value="#{factura.bodegas.idBodega}">
+                                <f:selectItem itemLabel="--seleccione--"/>
+                                <f:selectItems value="#{facturaControl.listaBodegas}"/>
+                            </h:selectOneMenu>		
+                            <p:outputLabel value="dueño:"/>		
+                            <h:selectOneMenu value="#{factura.cliente.idCliente}">
+                                <f:selectItems value="#{facturaControl.listaClientes}"/>
+                            </h:selectOneMenu>			
+                        </p:panelGrid>
+                        <p:commandButton  value="Guardar" actionListener="#{facturaControl.agregarFactura()}" update="formListado:tablaFactura" oncomplete="PF('dialogoAgregar').hide();"/>
+                        <p:commandButton value="Cancelar" onclick="PF('dialogoAgregar').hide();" />
+                    </p:dialog>		
+                </h:form>
+                 
+                  <h:form id="formModificar">		
+                    <p:dialog id="dlmodificar" header="Modificar Producto" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">		
                         <p:panelGrid columns="2" style="margin: 0 auto;">
-                            <p:outputLabel value="Altura"/>
-                            <p:inputText value="#{bodegasControl.bodegas.alturaCmTotal}"/>
-                              <p:outputLabel value="Ancho"/>
-                            <p:inputText value="#{bodegasControl.bodegas.anchoCmTotal}"/>
-                              <p:outputLabel value="Largo"/>
-                            <p:inputText value="#{bodegasControl.bodegas.largoCmTotal}"/>
-                              <p:outputLabel value="Precio $"/>
-                            <p:inputText value="#{bodegasControl.bodegas.precio}"/>
-                            <p:outputLabel value="# Estantes"/>
-                            <p:inputText value="#{bodegasControl.bodegas.numeroEstantes}"/>
-                              <p:outputLabel value="Descripcion"/>
-                            <p:inputText value="#{bodegasControl.bodegas.descripcion}"/>
-                 
+                            <p:outputLabel value="bodegas:"/>		
+                            <h:selectOneMenu value="#{factura.bodegas.idBodega}">
+                                <f:selectItems itemLabel="--seleccione--"/>
+                                <f:selectItems value="#{facturaControl.listaBodegas}"/>
+                            </h:selectOneMenu>		
+                            <p:outputLabel value="dueño:"/>		
+                            <p:selectOneMenu value="#{factura.cliente.idCliente}">
+                                <f:selectItems value="#{facturaControl.listaClientes}"/>
+                            </p:selectOneMenu>			
                         </p:panelGrid>
-                        <p:commandButton  value="Guardar" actionListener="#{bodegasControl.agregarBodegas()}" update=":formListado:tablaBodegas" oncomplete="PF('dialogoAgregar').hide();"/>
-                        <p:commandButton  value="Cancelar" onclick="PF('dialogoAgregar').hide();"/>
-                    </p:dialog>
+                        <p:commandButton  value="Guardar" actionListener="#{facturaControl.modificarFactura()}" update=":formListado:tablaFactura" oncomplete="PF('dialogoModificar').hide();"/>
+                        <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();" />
+                    </p:dialog>		
                 </h:form>
-
-                <h:form id="formModificar">
-                    <p:dialog id="dlgModificar" header="Modificar Cliente" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">
-                                      <p:panelGrid columns="2" style="margin: 0 auto;">
-                            <p:outputLabel value="Altura"/>
-                            <p:inputText value="#{bodegasControl.bodegas.alturaCmTotal}"/>
-                              <p:outputLabel value="Ancho"/>
-                            <p:inputText value="#{bodegasControl.bodegas.anchoCmTotal}"/>
-                              <p:outputLabel value="Largo"/>
-                            <p:inputText value="#{bodegasControl.bodegas.largoCmTotal}"/>
-                              <p:outputLabel value="Precio $"/>
-                            <p:inputText value="#{bodegasControl.bodegas.precio}"/>
-                            <p:outputLabel value="# Estantes"/>
-                            <p:inputText value="#{bodegasControl.bodegas.numeroEstantes}"/>
-                              <p:outputLabel value="Descripcion"/>
-                            <p:inputText value="#{bodegasControl.bodegas.descripcion}"/>
-                 
-                        </p:panelGrid>
-
-                            
-             
-                        <p:commandButton  value="Guardar" actionListener="#{bodegasControl.modificarBodegas()}" update=":formListado:tablaBodegas" oncomplete="PF('dialogoModificar').hide();"/>
-                        <p:commandButton  value="Cancelar" onclick="PF('dialogoModificar').hide();"/>
-                    </p:dialog>
-                </h:form>
-
             </ui:define>
 
         </ui:composition>

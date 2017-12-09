@@ -8,80 +8,74 @@ package modelo.dao;
 import java.util.List;
 import modelo.entidad.Factura;
 import modelo.util.HibernateUtil;
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 /**
  *
- * @author Mcortez
+ * @author julio
  */
 public class FacturaDao {
-    
-     public List<Factura> listarFactura() {
-        List<Factura> lista = null;
-        Session sesion = HibernateUtil.getSessionFactory().openSession();
-        Transaction t = sesion.beginTransaction();
-        String hql = "FROM Factura";
-        try {
-            lista = sesion.createQuery(hql).list();
+     public List<Factura> listaFactura(){
+        List<Factura> lista=null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        String sql = "FROM Factura";
+        try{
+            lista = session.createQuery(sql).list();
             t.commit();
-            sesion.close();
-        } catch (HibernateException e) {
+        }catch(Exception e){
             t.rollback();
         }
         return lista;
     }
-    
-      public void agregar(Factura bodegas) {
-        Session sesion = null;
-        try {
-            sesion = HibernateUtil.getSessionFactory().openSession();
-            sesion.beginTransaction();
-            sesion.save(bodegas);
-            sesion.getTransaction().commit();
-        } catch (Exception e) {
+    public void agregar(Factura producto){
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(producto);
+            session.getTransaction().commit();
+        }catch(Exception e){
             System.out.println(e.getMessage());
-            sesion.getTransaction().rollback();
-        } finally {
-            if (sesion != null) {
-                sesion.close();
+            session.getTransaction().rollback();
+        }
+        finally{
+            if(session != null){
+                session.close();
             }
         }
     }
-
-    public void modificar(Factura bodegas) {
-        Session sesion = null;
-        try {
-            sesion = HibernateUtil.getSessionFactory().openSession();
-            sesion.beginTransaction();
-            sesion.update(bodegas);
-            sesion.getTransaction().commit();
-        } catch (Exception e) {
+    public void actualizar(Factura producto){
+        Session session = null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.update(producto);
+            session.getTransaction().commit();
+        }catch(Exception e){
             System.out.println(e.getMessage());
-            sesion.getTransaction().rollback();
-        } finally {
-            if (sesion != null) {
-                sesion.close();
-            }
+            session.getTransaction().rollback();
+        }
+        finally{
+            if(session != null)
+                session.close();
         }
     }
-
-    public void eliminar(Factura bodegas) {
-        Session sesion = null;
-        try {
-            sesion = HibernateUtil.getSessionFactory().openSession();
-            sesion.beginTransaction();
-            sesion.delete(bodegas);
-            sesion.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            sesion.getTransaction().rollback();
-        } finally {
-            if (sesion != null) {
-                sesion.close();
-            }
+    public void eleminar(Factura producto){
+        Session session=null;
+        try{
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.delete(producto);
+            session.getTransaction().commit();
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            session.getTransaction().rollback();
+        }
+        finally{
+            if(session!=null)
+                session.close();
         }
     }
-    
 }
