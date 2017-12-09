@@ -14,11 +14,11 @@
             <ui:define name="content">
                  <h3>Listado de Producto</h3>		
                 <h:form>		
-                    <p:commandButton value="Agregar Producto" actionListener="#{productoControl.limpiarProducto()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar" />		
+                    <p:commandButton value="Agregar Producto" actionListener="#{productoBean.limpiarProducto()}" oncomplete="PF('dialogoAgregar').show();" update=":formAgregar" />		
                     <p:separator/>		
                 </h:form>		
                 <h:form id="formListado">		
-                    <p:dataTable id="tablaProductos" paginator="true" paginatorPosition="botton" rows="10" var="producto" value="#{productoControl.listaProducto}" emptyMessage="no existen datos para mostrar">		
+                    <p:dataTable id="tablaProductos" paginator="true" paginatorPosition="botton" rows="10" var="producto" value="#{productoBean.listaProducto}" emptyMessage="no existen datos para mostrar">		
                         <p:column headerText="codigo producto" style="text-align: center">		
                             <h:outputText value="#{producto.idProducto}"/>		
                         </p:column>		
@@ -57,7 +57,7 @@
                         </p:column>		
                         <p:column headerText="MODIFICAR" style="text-align: center">		
                             <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">		
-                                <f:setPropertyActionListener target="#{productoControl.producto}" value="#{producto}"/>		
+                                <f:setPropertyActionListener target="#{productoBean.producto}" value="#{producto}"/>		
                             </p:commandButton>		
                         </p:column>		
                         		
@@ -67,37 +67,39 @@
                 <h:form id="formAgregar">		
                     <p:dialog id="dlAgregar" header="Agregar Producto" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">		
                         <p:panelGrid columns="2" style="margin: 0 auto;">		
-                            	
-                            <p:outputLabel value="nombre:"/>		
-                            <p:inputText value="#{producto.descripcion}"/>		
+                            <p:outputLabel value="nombre:"/>
+                            <p:inputText value="#{productoBean.producto.nombre}"/>
+                            <p:outputLabel value="descripcion:"/>		
+                            <p:inputText value="#{productoBean.producto.descripcion}"/>		
                             <p:outputLabel value="tipo:"/>	
-                            <h:selectOneMenu value="#{producto.tipoproducto.idTipo}">
+                            <h:selectOneMenu value="#{productoBean.producto.tipoproducto.idTipo}">
                                 <f:selectItem itemLabel="--Seleccione--"/>		
-                                <f:selectItems value="#{productoControl.listaTipoproducto}"/>
+                                <f:selectItems value="#{productoBean.listaTipoproducto}"/>
                             </h:selectOneMenu>
                             <p:outputLabel value="altura"/>		
-                            <p:inputText value="#{producto.alturaCm}"/>		
+                            <p:inputText value="#{productoBean.producto.alturaCm}"/>		
                             <p:outputLabel value="ancho:"/>		
-                            <p:inputText value="#{producto.anchoCm}" />		
+                            <p:inputText value="#{productoBean.producto.anchoCm}" />		
                             <p:outputLabel value="largo:"/>		
-                            <p:inputText value="#{producto.largoCm}"/>		
+                            <p:inputText value="#{productoBean.producto.largoCm}"/>		
                             <p:outputLabel value="volumen:"/>		
-                            <p:inputText value="#{producto.volumen}"/>		
+                            <p:inputText value="#{productoBean.producto.volumen}"/>		
                             <p:outputLabel value="peso:"/>		
-                            <p:inputText value="#{producto.pesoLibras}"/>		
+                            <p:inputText value="#{productoBean.producto.pesoLibras}"/>		
                             <p:outputLabel value="stock:"/>		
-                            <p:inputText value="#{producto.stock}"/>		
+                            <p:inputText value="#{productoBean.producto.stock}"/>		
                             <p:outputLabel value="bodegas:"/>		
-                            <h:selectOneMenu value="#{producto.bodegas.idBodega}">
+                            <h:selectOneMenu value="#{productoBean.producto.bodegas.idBodega}">
                                 <f:selectItem itemLabel="--seleccione--"/>
-                                <f:selectItems value="#{productoControl.listaBodegas}"/>
+                                <f:selectItems value="#{productoBean.listaBodegas}"/>
                             </h:selectOneMenu>		
                             <p:outputLabel value="dueño:"/>		
-                            <h:selectOneMenu value="#{producto.cliente.idCliente}">
-                                <f:selectItems value="#{productoControl.listaClientes}"/>
+                            <h:selectOneMenu value="#{productoBean.producto.cliente.idCliente}">
+                                <f:selectItem itemLabel="--seleccione--"/>
+                                <f:selectItems value="#{productoBean.listaCliente}"/>
                             </h:selectOneMenu>			
                         </p:panelGrid>
-                        <p:commandButton  value="Guardar" actionListener="#{productoControl.agregarProducto()}" update="formListado:tablaProductos" oncomplete="PF('dialogoAgregar').hide();"/>
+                        <p:commandButton  value="Guardar" actionListener="#{productoBean.guardar()}" update="formListado:tablaProductos" oncomplete="PF('dialogoAgregar').hide();"/>
                         <p:commandButton value="Cancelar" onclick="PF('dialogoAgregar').hide();" />
                     </p:dialog>		
                 </h:form>
@@ -106,39 +108,39 @@
                     <p:dialog id="dlmodificar" header="Modificar Producto" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">		
                         <p:panelGrid columns="2" style="margin: 0 auto;">
                             <p:outputLabel value="numero:"/>
-                            <p:inputText value="#{productoControl.producto.idProducto}" disabled="true" />
+                            <p:inputText value="#{productoBean.producto.idProducto}" disabled="true" />
                             <p:outputLabel value="nombre:"/>		
-                            <p:inputText value="#{producto.nombre}"/>		
+                            <p:inputText value="#{productoBean.producto.nombre}"/>		
                             <p:outputLabel value="nombre:"/>		
-                            <p:inputText value="#{producto.descripcion}"/>		
+                            <p:inputText value="#{productoBean.producto.descripcion}"/>		
                             <p:outputLabel value="tipo:"/>	
-                            <h:selectOneMenu value="#{producto.tipoproducto.idTipo}">		
+                            <h:selectOneMenu value="#{productoBean.producto.tipoproducto.idTipo}">		
                                 <f:selectItem itemLabel="--Seleccione--"/>		
-                                <f:selectItems value="#{productoControl.listaTipoproducto}"/>		
+                                <f:selectItems value="#{productoBean.listaTipoproducto}"/>		
                             </h:selectOneMenu>		
                             <p:outputLabel value="altura"/>		
-                            <p:inputText value="#{producto.alturaCm}"/>		
+                            <p:inputText value="#{productoBean.producto.alturaCm}"/>		
                             <p:outputLabel value="ancho:"/>		
-                            <p:inputText value="#{producto.anchoCm}" />		
+                            <p:inputText value="#{productoBean.producto.anchoCm}" />		
                             <p:outputLabel value="largo:"/>		
-                            <p:inputText value="#{producto.largoCm}"/>		
+                            <p:inputText value="#{productoBean.producto.largoCm}"/>		
                             <p:outputLabel value="volumen:"/>		
-                            <p:inputText value="#{producto.volumen}"/>		
+                            <p:inputText value="#{productoBean.producto.volumen}"/>		
                             <p:outputLabel value="peso:"/>		
-                            <p:inputText value="#{producto.pesoLibras}"/>		
+                            <p:inputText value="#{productoBean.producto.pesoLibras}"/>		
                             <p:outputLabel value="stock:"/>		
-                            <p:inputText value="#{producto.stock}"/>		
+                            <p:inputText value="#{productoBean.producto.stock}"/>		
                             <p:outputLabel value="bodegas:"/>		
-                            <h:selectOneMenu value="#{producto.bodegas.idBodega}">
+                            <h:selectOneMenu value="#{productoBean.producto.bodegas.idBodega}">
                                 <f:selectItems itemLabel="--seleccione--"/>
-                                <f:selectItems value="#{productoControl.listaBodegas}"/>
+                                <f:selectItems value="#{productoBean.listaBodegas}"/>
                             </h:selectOneMenu>		
                             <p:outputLabel value="dueño:"/>		
-                            <p:selectOneMenu value="#{producto.cliente.idCliente}">
-                                <f:selectItems value="#{productoControl.listaClientes}"/>
+                            <p:selectOneMenu value="#{productoBean.producto.cliente.idCliente}">
+                                <f:selectItems value="#{productoBean.listaCliente}"/>
                             </p:selectOneMenu>			
                         </p:panelGrid>
-                        <p:commandButton  value="Guardar" actionListener="#{productoControl.modificarProducto()}" update=":formListado:tablaProductos" oncomplete="PF('dialogoModificar').hide();"/>
+                        <p:commandButton  value="Guardar" actionListener="#{productoBean.actualizar()}" update=":formListado:tablaProductos" oncomplete="PF('dialogoModificar').hide();"/>
                         <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();" />
                     </p:dialog>		
                 </h:form>

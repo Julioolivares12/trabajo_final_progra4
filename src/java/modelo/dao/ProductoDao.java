@@ -8,6 +8,7 @@ package modelo.dao;
 import java.util.List;
 import modelo.entidad.Producto;
 import modelo.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -31,12 +32,13 @@ public class ProductoDao {
     }
     public void agregar(Producto producto){
         Session session = null;
+        Transaction tr = null;
         try{
             session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
+          tr=session.beginTransaction();
             session.save(producto);
             session.getTransaction().commit();
-        }catch(Exception e){
+        }catch(HibernateException e){
             System.out.println(e.getMessage());
             session.getTransaction().rollback();
         }
@@ -53,7 +55,7 @@ public class ProductoDao {
             session.beginTransaction();
             session.update(producto);
             session.getTransaction().commit();
-        }catch(Exception e){
+        }catch(HibernateException e){
             System.out.println(e.getMessage());
             session.getTransaction().rollback();
         }

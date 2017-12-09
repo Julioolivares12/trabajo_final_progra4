@@ -12,6 +12,7 @@ import java.util.Set;
 public class Producto  implements java.io.Serializable {
 
 
+    
      private Integer idProducto;
      private Bodegas bodegas;
      private Cliente cliente;
@@ -24,10 +25,15 @@ public class Producto  implements java.io.Serializable {
      private BigDecimal volumen;
      private BigDecimal pesoLibras;
      private int stock;
-     private Set<Registrosalida> registrosalidas = new HashSet<Registrosalida>(0);
-     private Set<Registroentradas> registroentradases = new HashSet<Registroentradas>(0);
+     private Set<Registrosalida> registrosalidas = new HashSet<>(0);
+     private Set<Registroentradas> registroentradases = new HashSet<>(0);
 
     public Producto() {
+        
+     
+        cliente = new Cliente();
+        tipoproducto = new Tipoproducto();
+        bodegas = new Bodegas();   
     }
 
 	
@@ -59,7 +65,7 @@ public class Producto  implements java.io.Serializable {
        this.registrosalidas = registrosalidas;
        this.registroentradases = registroentradases;
     }
-   
+
     public Integer getIdProducto() {
         return this.idProducto;
     }

@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
@@ -25,7 +26,7 @@ import modelo.entidad.Tipoproducto;
  *
  * @author julio
  */
-@ManagedBean
+@ManagedBean(name="productoControl")
 @ViewScoped
 public class ProductoControl implements Serializable {
 
@@ -35,36 +36,32 @@ public class ProductoControl implements Serializable {
      */
     //Listas
     private List<Producto> listaProducto;
+    private Producto producto;
     private List<SelectItem> listaBodegas;
     private List<SelectItem> listaCliente;
     private List<SelectItem> listaTipoproducto;
+            
+    //variables
+    
+    @ManagedProperty("#{bodegas}")
+    private Bodegas bodegas;
+    @ManagedProperty("#{cliente}")
+    private Cliente cliente;
+        @ManagedProperty("#{tipo}")
+
+    private Tipoproducto tipo;
+
 
     public List<SelectItem> getListaTipoproducto() {
-        this.listaTipoproducto = new ArrayList<SelectItem>();
+        this.listaTipoproducto = new ArrayList<>();
        TipoProductoDao tipo = new TipoProductoDao();
         List<Tipoproducto> tp = tipo.listarTipoproductos();
         
         listaTipoproducto.clear();
-       for(Tipoproducto tproducto : tp){
-           SelectItem tipoItem = new SelectItem(tproducto.getIdTipo());
-           listaTipoproducto.add(tipoItem);
-       }
+        tp.stream().map((tproducto) -> new SelectItem(tproducto.getIdTipo())).forEachOrdered((tipoItem) -> {
+            listaTipoproducto.add(tipoItem);
+        });
         return listaTipoproducto;
-    }
-    
-    //variables
-    private Producto producto;
-    private Bodegas bodegas;
-    private Cliente cliente;
-    private Tipoproducto tipo;
-
-    
-    public Tipoproducto getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(Tipoproducto tipo) {
-        this.tipo = tipo;
     }
 
     public Bodegas getBodegas() {
@@ -82,6 +79,17 @@ public class ProductoControl implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+    public Tipoproducto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipoproducto tipo) {
+        this.tipo = tipo;
+    }
+
+    
+   
     public ProductoControl() {
        producto = new Producto();
     }
@@ -91,26 +99,23 @@ public class ProductoControl implements Serializable {
         return listaProducto;
     }
     public List<SelectItem>getListaBodegas(){
-        this.listaBodegas = new ArrayList<SelectItem>();
+        this.listaBodegas = new ArrayList<>();
         BodegasDao bodegasDao = new BodegasDao();
         List<Bodegas> b = bodegasDao.listarBodegas();
         listaBodegas.clear();
-        for(Bodegas bodega : b)
-        {
-            SelectItem bodegaItem = new SelectItem(bodega.getIdBodega());
+        b.stream().map((bodega) -> new SelectItem(bodega.getIdBodega())).forEachOrdered((bodegaItem) -> {
             listaBodegas.add(bodegaItem);
-        }
+        });
         return listaBodegas; 
     }
     public List<SelectItem>getListaClientes(){
-        this.listaCliente = new ArrayList<SelectItem>();
+        this.listaCliente = new ArrayList<>();
         ClienteDao clienteDao = new ClienteDao();
         List<Cliente> c = clienteDao.listarClientes();
         listaCliente.clear();
-        for(Cliente cliente1 : c){
-            SelectItem clienteItem = new SelectItem(cliente1.getIdCliente()+" "+cliente1.getNombre());
+        c.stream().map((cliente1) -> new SelectItem(cliente1.getIdCliente()+" "+cliente1.getNombre())).forEachOrdered((clienteItem) -> {
             listaCliente.add(clienteItem);
-        }
+        });
         return listaCliente;
     }
      public void setListaProducto(List<Producto>listaProducto){
@@ -128,6 +133,7 @@ public class ProductoControl implements Serializable {
     public void agregarProducto(){
         ProductoDao p = new ProductoDao();
         p.agregar(producto);
+        limpiarProducto();
     }
     public void modificarProducto(){
         ProductoDao p = new ProductoDao();
