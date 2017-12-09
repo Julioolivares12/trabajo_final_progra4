@@ -6,8 +6,11 @@
 package controlador;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -20,6 +23,8 @@ import modelo.dao.TipoProductoDao;
 import modelo.entidad.Bodegas;
 import modelo.entidad.Cliente;
 import modelo.entidad.Producto;
+import modelo.entidad.Registroentradas;
+import modelo.entidad.Registrosalida;
 import modelo.entidad.Tipoproducto;
 
 /**
@@ -30,6 +35,174 @@ import modelo.entidad.Tipoproducto;
 @ViewScoped
 @Named("productoBean")
 public class ProductoBean implements Serializable{
+
+    /**
+     * @return the idProducto
+     */
+    public Integer getIdProducto() {
+        return idProducto;
+    }
+
+    /**
+     * @param idProducto the idProducto to set
+     */
+    public void setIdProducto(Integer idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    /**
+     * @return the tipoproducto
+     */
+    public Tipoproducto getTipoproducto() {
+        return tipoproducto;
+    }
+
+    /**
+     * @param tipoproducto the tipoproducto to set
+     */
+    public void setTipoproducto(Tipoproducto tipoproducto) {
+        this.tipoproducto = tipoproducto;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+
+    /**
+     * @param nombre the nombre to set
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    /**
+     * @return the alturaCm
+     */
+    public BigDecimal getAlturaCm() {
+        return alturaCm;
+    }
+
+    /**
+     * @param alturaCm the alturaCm to set
+     */
+    public void setAlturaCm(BigDecimal alturaCm) {
+        this.alturaCm = alturaCm;
+    }
+
+    /**
+     * @return the anchoCm
+     */
+    public BigDecimal getAnchoCm() {
+        return anchoCm;
+    }
+
+    /**
+     * @param anchoCm the anchoCm to set
+     */
+    public void setAnchoCm(BigDecimal anchoCm) {
+        this.anchoCm = anchoCm;
+    }
+
+    /**
+     * @return the largoCm
+     */
+    public BigDecimal getLargoCm() {
+        return largoCm;
+    }
+
+    /**
+     * @param largoCm the largoCm to set
+     */
+    public void setLargoCm(BigDecimal largoCm) {
+        this.largoCm = largoCm;
+    }
+
+    /**
+     * @return the volumen
+     */
+    public BigDecimal getVolumen() {
+        return volumen;
+    }
+
+    /**
+     * @param volumen the volumen to set
+     */
+    public void setVolumen(BigDecimal volumen) {
+        this.volumen = volumen;
+    }
+
+    /**
+     * @return the pesoLibras
+     */
+    public BigDecimal getPesoLibras() {
+        return pesoLibras;
+    }
+
+    /**
+     * @param pesoLibras the pesoLibras to set
+     */
+    public void setPesoLibras(BigDecimal pesoLibras) {
+        this.pesoLibras = pesoLibras;
+    }
+
+    /**
+     * @return the stock
+     */
+    public int getStock() {
+        return stock;
+    }
+
+    /**
+     * @param stock the stock to set
+     */
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    /**
+     * @return the registrosalidas
+     */
+    public Set<Registrosalida> getRegistrosalidas() {
+        return registrosalidas;
+    }
+
+    /**
+     * @param registrosalidas the registrosalidas to set
+     */
+    public void setRegistrosalidas(Set<Registrosalida> registrosalidas) {
+        this.registrosalidas = registrosalidas;
+    }
+
+    /**
+     * @return the registroentradases
+     */
+    public Set<Registroentradas> getRegistroentradases() {
+        return registroentradases;
+    }
+
+    /**
+     * @param registroentradases the registroentradases to set
+     */
+    public void setRegistroentradases(Set<Registroentradas> registroentradases) {
+        this.registroentradases = registroentradases;
+    }
 
     /**
      * Creates a new instance of ProductoBean
@@ -46,6 +219,20 @@ public class ProductoBean implements Serializable{
     private Cliente cliente;
     private List<SelectItem> listaTipoproducto;
     private Tipoproducto tipo;
+    
+     private Integer idProducto;
+     
+     private Tipoproducto tipoproducto;
+     private String nombre;
+     private String descripcion;
+     private BigDecimal alturaCm;
+     private BigDecimal anchoCm;
+     private BigDecimal largoCm;
+     private BigDecimal volumen;
+     private BigDecimal pesoLibras;
+     private int stock;
+     private Set<Registrosalida> registrosalidas = new HashSet<>(0);
+     private Set<Registroentradas> registroentradases = new HashSet<>(0);
 
     //metodos set y get
     public Producto getProducto() {
@@ -139,6 +326,8 @@ public class ProductoBean implements Serializable{
     public void guardar(){
         ProductoDao dao;
         dao = new ProductoDao();
+        
+        System.out.println(producto.getNombre() );
         dao.agregar(producto);
     }
     public void actualizar(){
@@ -151,7 +340,7 @@ public class ProductoBean implements Serializable{
     }
     @PostConstruct
 public void init() {
-   producto = new Producto();
+  this.producto = new Producto();
 }
     
 }

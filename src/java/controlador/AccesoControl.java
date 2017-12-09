@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -18,7 +19,7 @@ import modelo.entidad.Usuario;
  */
 @ManagedBean
 @ViewScoped
-public class AccesoControl {
+public class AccesoControl implements Serializable {
     public void verificarSesion(int privilegio){
         LoginControl objeto = new LoginControl();
         FacesMessage mensaje = null;

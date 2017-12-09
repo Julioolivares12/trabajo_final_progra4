@@ -12,6 +12,7 @@ import modelo.entidad.Usuario;
 import modelo.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -35,5 +36,21 @@ public class UsuarioDao{
             FacesContext.getCurrentInstance().addMessage(null, mensaje);
         }
         return usuario;
+    }
+    public void CrearCuenta(Usuario usuario){
+        
+        Transaction tr = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            tr = session.beginTransaction();
+            session.save(usuario);
+            session.getTransaction().commit();
+        }
+        catch(Exception ex){
+            if(tr!=null)
+                tr.rollback();
+            ex.getMessage();
+        }
+        
     }
 }

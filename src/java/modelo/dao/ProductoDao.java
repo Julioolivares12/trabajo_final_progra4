@@ -37,10 +37,13 @@ public class ProductoDao {
             session = HibernateUtil.getSessionFactory().openSession();
           tr=session.beginTransaction();
             session.save(producto);
-            session.getTransaction().commit();
+            tr.commit();
         }catch(HibernateException e){
             System.out.println(e.getMessage());
-            session.getTransaction().rollback();
+            if(tr!=null){
+                tr.rollback();
+            }
+           
         }
         finally{
             if(session != null){
