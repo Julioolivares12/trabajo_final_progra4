@@ -15,7 +15,11 @@
                     <p:panel>
                         <p:panelGrid>
                             <p:row>                               
-                               
+                               <p:column headerText="Producto:">
+                                     
+                                     <p:inputText value="#{reportFacturasControl.nombre}"/>
+                                     
+                                </p:column>
                                 <p:column>
                                      <p:commandButton value="Generar" action="#{reportFacturasControl.generarReporte()}" ajax="false" onclick="target = '_blank'"  />
                                 </p:column>

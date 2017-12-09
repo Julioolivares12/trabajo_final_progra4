@@ -15,13 +15,13 @@
 	</style>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="logo" class="java.lang.String"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[Select f.idFactura, c.nombre, f.idBodega, b.precio,t.tipoPago, f.estado
 	                 from factura as f
 					 inner join cliente as c  on f.idCliente=c.idCliente
 					 inner join bodegas as b on f.idBodega=b.idBodega
 					 inner join tipoPago as t on t.idTipoPago = f.idTipoPago
-	where f.estado<>'c' and c.nombre like '%' 'Coca Cola' '%'   ;]]>
+	where f.estado<>'c' and c.nombre like  $P{nombre};]]>
 	</queryString>
 	<field name="idFactura" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
