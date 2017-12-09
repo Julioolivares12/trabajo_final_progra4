@@ -50,13 +50,13 @@
                             <h:outputText value="#{producto.stock}"/>		
                         </p:column>		
                         <p:column headerText="Bodega">		
-                            <h:outputText value="#{producto.bodegas}"/>		
+                            <h:outputText value="#{producto.bodegas.idBodega}"/>		
                         </p:column>		
                         <p:column headerText="Cliente">		
-                            <h:outputText value="#{producto.cliente}"/>    		
+                            <h:outputText value="#{producto.cliente.nombre}"/>    		
                         </p:column>		
                         <p:column headerText="MODIFICAR" style="text-align: center">		
-                            <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialoModificar').show();" update=":formModificar">		
+                            <p:commandButton icon="ui-icon-pencil" title="Modificar" oncomplete="PF('dialogoModificar').show();" update=":formModificar">		
                                 <f:setPropertyActionListener target="#{productoControl.producto}" value="#{producto}"/>		
                             </p:commandButton>		
                         </p:column>		
@@ -67,16 +67,14 @@
                 <h:form id="formAgregar">		
                     <p:dialog id="dlAgregar" header="Agregar Producto" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">		
                         <p:panelGrid columns="2" style="margin: 0 auto;">		
-                            <p:outputLabel value="nombre:"/>		
-                            <p:inputText value="#{producto.nombre}"/>		
+                            	
                             <p:outputLabel value="nombre:"/>		
                             <p:inputText value="#{producto.descripcion}"/>		
                             <p:outputLabel value="tipo:"/>	
                             <h:selectOneMenu value="#{producto.tipoproducto.idTipo}">
                                 <f:selectItem itemLabel="--Seleccione--"/>		
-                                <f:selectItems value="#{productoControl.listaProducto}"/>
+                                <f:selectItems value="#{productoControl.listaTipoproducto}"/>
                             </h:selectOneMenu>
-                            	
                             <p:outputLabel value="altura"/>		
                             <p:inputText value="#{producto.alturaCm}"/>		
                             <p:outputLabel value="ancho:"/>		
@@ -106,7 +104,9 @@
                  
                   <h:form id="formModificar">		
                     <p:dialog id="dlmodificar" header="Modificar Producto" widgetVar="dialogoModificar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">		
-                        <p:panelGrid columns="2" style="margin: 0 auto;">		
+                        <p:panelGrid columns="2" style="margin: 0 auto;">
+                            <p:outputLabel value="numero:"/>
+                            <p:inputText value="#{productoControl.producto.idProducto}" disabled="true" />
                             <p:outputLabel value="nombre:"/>		
                             <p:inputText value="#{producto.nombre}"/>		
                             <p:outputLabel value="nombre:"/>		
@@ -114,7 +114,7 @@
                             <p:outputLabel value="tipo:"/>	
                             <h:selectOneMenu value="#{producto.tipoproducto.idTipo}">		
                                 <f:selectItem itemLabel="--Seleccione--"/>		
-                                <f:selectItems value="#{productoControl.listaProducto}"/>		
+                                <f:selectItems value="#{productoControl.listaTipoproducto}"/>		
                             </h:selectOneMenu>		
                             <p:outputLabel value="altura"/>		
                             <p:inputText value="#{producto.alturaCm}"/>		
@@ -138,7 +138,7 @@
                                 <f:selectItems value="#{productoControl.listaClientes}"/>
                             </p:selectOneMenu>			
                         </p:panelGrid>
-                        <p:commandButton  value="Guardar" actionListener="#{productoControl.agregarProducto()}" update=":formListado:tablaProductos" oncomplete="PF('dialogoModificar').hide();"/>
+                        <p:commandButton  value="Guardar" actionListener="#{productoControl.modificarProducto()}" update=":formListado:tablaProductos" oncomplete="PF('dialogoModificar').hide();"/>
                         <p:commandButton value="Cancelar" onclick="PF('dialogoModificar').hide();" />
                     </p:dialog>		
                 </h:form>
