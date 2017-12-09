@@ -8,6 +8,7 @@ package modelo.dao;
 import java.util.List;
 import modelo.entidad.Factura;
 import modelo.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -26,7 +27,7 @@ public class FacturaDao {
             lista = sesion.createQuery(hql).list();
             t.commit();
             sesion.close();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             t.rollback();
         }
         return lista;

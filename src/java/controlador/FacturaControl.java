@@ -15,6 +15,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
 import modelo.dao.FacturaDao;
+import modelo.entidad.Bodegas;
+import modelo.entidad.Cliente;
 import modelo.entidad.Factura;
 /**
  *
@@ -27,6 +29,8 @@ public class FacturaControl {
     
     private List<Factura> listaFactura;
     private Factura factura;
+    private Cliente cliente;
+    private Bodegas bodega;
      public FacturaControl() {
         factura = new Factura();
     }
@@ -49,6 +53,22 @@ public class FacturaControl {
         this.factura = factura;
     }
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Bodegas getBodega() {
+        return bodega;
+    }
+
+    public void setBodega(Bodegas bodega) {
+        this.bodega = bodega;
+    }
+    
     public void limpiarFactura() {
         factura = new Factura();
     }
