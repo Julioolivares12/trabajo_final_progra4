@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -14,9 +15,11 @@ import javax.faces.model.SelectItem;
 import modelo.dao.BodegasDao;
 import modelo.dao.ClienteDao;
 import modelo.dao.ProductoDao;
+import modelo.dao.TipoProductoDao;
 import modelo.entidad.Bodegas;
 import modelo.entidad.Cliente;
 import modelo.entidad.Producto;
+import modelo.entidad.Tipoproducto;
 
 /**
  *
@@ -24,17 +27,45 @@ import modelo.entidad.Producto;
  */
 @ManagedBean
 @ViewScoped
-public class ProductoControl {
+public class ProductoControl implements Serializable {
 
+    
     /**
      * Creates a new instance of ProductoControl
      */
+    //Listas
     private List<Producto> listaProducto;
     private List<SelectItem> listaBodegas;
     private List<SelectItem> listaCliente;
+    private List<SelectItem> listaTipoproducto;
+
+    public List<SelectItem> getListaTipoproducto() {
+        this.listaTipoproducto = new ArrayList<SelectItem>();
+       TipoProductoDao tipo = new TipoProductoDao();
+        List<Tipoproducto> tp = tipo.listarTipoproductos();
+        
+        listaTipoproducto.clear();
+       for(Tipoproducto tproducto : tp){
+           SelectItem tipoItem = new SelectItem(tproducto.getIdTipo());
+           listaTipoproducto.add(tipoItem);
+       }
+        return listaTipoproducto;
+    }
+    
+    //variables
     private Producto producto;
     private Bodegas bodegas;
     private Cliente cliente;
+    private Tipoproducto tipo;
+
+    
+    public Tipoproducto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipoproducto tipo) {
+        this.tipo = tipo;
+    }
 
     public Bodegas getBodegas() {
         return bodegas;
