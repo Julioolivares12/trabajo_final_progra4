@@ -46,7 +46,7 @@ public class TipoPagoDao {
             }
         }
     }
-    public void actualizar(Tipopago producto){
+    public void modificar(Tipopago producto){
         Session session = null;
         try{
             session = HibernateUtil.getSessionFactory().openSession();
@@ -62,7 +62,7 @@ public class TipoPagoDao {
                 session.close();
         }
     }
-    public void eleminar(Tipopago producto){
+    public void eliminar(Tipopago producto){
         Session session=null;
         try{
             session = HibernateUtil.getSessionFactory().openSession();
