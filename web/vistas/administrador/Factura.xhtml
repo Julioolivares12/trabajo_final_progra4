@@ -1,8 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"  
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
@@ -47,16 +46,18 @@
                     <p:dialog id="dlAgregar" header="Agregar Factura" widgetVar="dialogoAgregar" resizable="false" showEffect="fade" hideEffect="explode" modal="true">		
                         <p:panelGrid columns="2" style="margin: 0 auto;">				
                             <p:outputLabel value="Bodega:"/>		
-                            <h:selectOneMenu value="#{facturaControl.bodegas.idBodega}">
+                            <h:selectOneMenu value="">
                                 <f:selectItem itemLabel="--seleccione--"/>
                                 <f:selectItems value="#{facturaControl.listaBodegas}"/>
                             </h:selectOneMenu>		
                             <p:outputLabel value="Cliente:"/>		
                             <h:selectOneMenu value="#{facturaControl.cliente.idCliente}">
+                                <f:selectItem itemLabel="--seleccione--"/>
                                 <f:selectItems value="#{facturaControl.listaCliente}"/>
                             </h:selectOneMenu>	
                             <p:outputLabel value="Tipo Pago:"/>		
                             <h:selectOneMenu value="#{facturaControl.tipopago.idTipoPago}">
+                                <f:selectItem itemLabel="--seleccione--"/>
                                 <f:selectItems value="#{facturaControl.listaTipopago}"/>
                             </h:selectOneMenu>
                             <p:outputLabel value="Estado:"/>

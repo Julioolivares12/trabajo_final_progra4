@@ -27,7 +27,7 @@ import modelo.entidad.Tipopago;
  */
 @ManagedBean
 @ViewScoped
-public class FacturaControl implements Serializable {
+public class FacturaControl {
 
     
     /**
