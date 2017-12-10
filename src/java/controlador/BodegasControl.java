@@ -28,6 +28,9 @@ public class BodegasControl {
     private List<Bodegas> listaBodegas;
     private Bodegas bodegas;
     private BigDecimal vt,al,an,la,vo,vd; 
+    private char estado;
+    
+    
    // private BigDecimal al; //altura
    // private BigDecimal an; //anchi
    // private BigDecimal la; //largo 
@@ -66,11 +69,11 @@ public class BodegasControl {
       la=bodegas.getLargoCmTotal();
       vt= (al.multiply(an)).multiply(la);
       vo = vt.subtract(vt);   
-      
+      estado='D';
       bodegas.setVolumenTotal(vt);
       bodegas.setVolumenDisponible(vt);
       bodegas.setVolumenOcupado(vo);
-            
+      bodegas.setEstado(estado);
         rd.agregar(bodegas);
     }
 
