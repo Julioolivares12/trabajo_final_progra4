@@ -19,7 +19,7 @@
 
         <div id="top">
             <ui:insert name="top">
-                <br></br>
+                <br></br>               
                 <h:form>
                     <p:menubar class="top">
                         <p:menuitem value="Inicio" outcome="./index.xhtml" icon="ui-icon-home" />
@@ -37,7 +37,7 @@
                             </p:submenu>
                             <p:submenu label="Bodegas" icon="ui-icon-circle-plus">
                                 <p:menuitem value="Bodegas"  outcome="/vistas/administrador/Bodegas" icon="ui-icon-arrowreturnthick-1-w" />
-                                <p:menuitem value="Bodegas-clientes" icon="ui-icon-arrowreturnthick-1-w" />
+                                <p:menuitem value="Bodegas-clientes" outcome="/vistas/administrador/BodegasClientes" icon="ui-icon-arrowreturnthick-1-w" />
                                 
                             </p:submenu> 
                         </p:submenu>
